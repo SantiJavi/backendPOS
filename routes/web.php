@@ -50,7 +50,8 @@ Route::get('/detalleCuenta/{id}','DetalleVentaController@consultaCuenta');
 Route::post('/ventaFecha','DetalleVentaController@consultaVentasByDate');
 Route::post('/ventasDiarias','VentaController@ventasDiarias');
 Route::put('/ventas/{venta}','VentaController@update');
-
+Route::get('/deudores','VentaController@clientesDeudores');
+Route::get('/saldos','CuentaController@cuentasPendientes');
 
 //info de Dashboard
 Route::get('/infoDashboard/{user}','InfoController@showDataGeneral');

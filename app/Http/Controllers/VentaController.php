@@ -75,7 +75,16 @@ class VentaController extends Controller
     {
         //
     } 
+    
     public function ventasDiarias(Request $request){
         return Venta::with(['Cliente'])->where('fecha_emision',$request->fecha_emision)->get();        
+    }
+    public function clientesDeudores(){
+        return Venta::with(['Cliente:id,nombre'])
+        ->selectRaw('cliente_id, SUM(total_grabado) as total_deuda')
+        ->where('tipo_pago','credito')
+        ->whereNull('fecha_pago')       
+        ->groupBy('cliente_id')     
+        ->get();
     }
 }

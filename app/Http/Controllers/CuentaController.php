@@ -81,4 +81,12 @@ class CuentaController extends Controller
         ->get();        
     }
 
+    public function cuentasPendientes(){
+        Cuenta::where('cliente_id',4)->get();
+        //->selectRaw('cliente_id,sum(saldo)') 
+        //->groupBy('cliente_id')
+        //->havingRaw('SUM(saldo) != 0')
+        //->get();
+    }
+
 }
