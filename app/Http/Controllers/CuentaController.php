@@ -58,7 +58,7 @@ class CuentaController extends Controller
         ->where('tipo_pago','credito')
         ->sum('total_grabado');             
         $detalleController = new DetalleVentaController();
-        $detalleCuenta=$detalleController->consultaDetalleCuentaActual();     
+        $detalleCuenta=$detalleController->consultaDetalleCuentaActual($clienteId);     
         $saldoAnterior = $this->show($clienteId)!=null ? $this->show($clienteId)->saldo : 0 ;        
         return response()->json([
             'total' => $totalCalculado,            
