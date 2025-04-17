@@ -50,10 +50,11 @@ class DetalleVentaController extends Controller
     public function consultaVentasByDate(Request $request)
     {                
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->fecha_emision)->format('Y-m-d');    
-        return DetalleVenta::with(['Producto', 'Venta'])
+        return DetalleVenta::with(['Producto', 'Venta.Cliente'])
             ->whereHas('Venta', function ($query) use ($formattedDate) {
                 $query->whereDate('fecha_emision', $formattedDate);
-            })->get();                        
+            })            
+            ->get();                        
     }
 
     public function consultaCuenta(String $id){        

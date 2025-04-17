@@ -33,7 +33,7 @@ class DetalleFacturaController extends Controller
     }
    
 
-    public function update(Request $request, DetalleFactura $detalleFactura)
+    public function update(Request $request, DetalleFactura $detallesFacturas)
     {
         $detallesFacturas->cantidad=$request->cantidad;
         $detallesFacturas->descuento=$request->descuento;
