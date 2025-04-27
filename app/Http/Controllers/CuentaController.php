@@ -38,8 +38,8 @@ class CuentaController extends Controller
             ->where('id',$maximoRegistro)
             ->first();
     }
-    public function showCuenta(String $id){
-        return Cuenta::where('cliente_id',$id)->get();
+    public function showCuenta(String $idCliente){
+        return Cuenta::where('cliente_id',$idCliente)->get();
     }
 
     public function update(Request $request, Cuenta $cuenta)
