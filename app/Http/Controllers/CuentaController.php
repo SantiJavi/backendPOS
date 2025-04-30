@@ -31,8 +31,8 @@ class CuentaController extends Controller
 
     public function show(String $idCliente)
     {
-        $maximaFecha = Cuenta::max('fecha_pago');
-        $maximoRegistro = Cuenta::max('id');
+        $maximaFecha = Cuenta::where('cliente_id', $idCliente)->max('fecha_pago');
+        $maximoRegistro = Cuenta::where('cliente_id', $idCliente)->max('id');
         return Cuenta::where('cliente_id',$idCliente)            
             ->where('fecha_pago',$maximaFecha)
             ->where('id',$maximoRegistro)
