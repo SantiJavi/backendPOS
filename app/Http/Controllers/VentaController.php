@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Venta;
 use App\Http\Controllers\DetalleVentaController;
 use App\Http\Controllers\SecuencialController;
+use App\Models\DetalleVenta;
 use App\Utils\Utils;
 use Illuminate\Http\Request;
 
@@ -44,33 +45,32 @@ class VentaController extends Controller
     {        
         return Venta::with(['Cliente'])->where('id',$idVenta)->get();
     }
+    
     public function update(Request $request, Venta $venta)
-    {  
+    {          
         try
         {        
             $venta->fecha_emision = $request->fecha_emision;        
             $venta->tipo_pago = $request->tipo_pago;
             $venta->secuencial_sec = $request->secuencial_sec;
-            $venta->total_grabado = $request->total_grabado;
-            if($request->tipo_pago == 'credito'){
-                $venta->fecha_pago = null;
-            }else{
-                
-                $venta->fecha_pago = $request->fecha_pago;
-            }            
+            $venta->total_grabado = $request->total_grabado;        
+            $venta->fecha_pago = $request->tipo_pago == 'credito' ? null : $request->fecha_pago;
             $venta->secuencial_id = $request->secuencial_id;
             $venta->cliente_id = $request->cliente_id;
-            $venta->cuenta_id = $request->cuenta_id;
+            $venta->cuenta_id = $request->cuenta_id;           
             $venta->save();
+                        
             return response()->json([
                 'message'=>'Dato Actualizado'
             ],200);
+
         }catch(\Exception $e){
             return response()->json([
                 'message'=> $e->getMessage()
             ],500);
         }
     }
+
     public function destroy(Venta $venta)
     {
         //
