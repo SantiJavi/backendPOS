@@ -13,7 +13,6 @@ class DetalleVentaController extends Controller
     public function index()
     {
         return DetalleVenta::with(['Venta','Producto'])->get();
-
     }
 
 
